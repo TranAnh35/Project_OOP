@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import demo.lecturerDashBoardController;
+import demo.lecturerDashBoardController.CourseInfo;
 import demo.Course.ClassSection;
 import demo.Data.DataBase;
 
@@ -108,6 +110,22 @@ public class ClassSectionDAO {
         }
     }
 
+    public String getCourseIDByClassSectionId(String classSectionId){
+        try{
+            connect = DataBase.connecDb();
+            prepare = connect.prepareStatement("SELECT courseID FROM classsection WHERE classSectionID = ?");
+            prepare.setString(1, classSectionId);
+            result = prepare.executeQuery();
+            if(result.next()){
+                return result.getString("courseID");
+            }
+            return null;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     // Hàm lấy ID của một môn học
     public String getCourseID(String classSectionID){
         try{
@@ -175,6 +193,23 @@ public class ClassSectionDAO {
         }
     }
 
+    public List<String> getClassSectionNamebyLecturerID(String lecturerID) {
+        List<String> classSectionNames = new ArrayList<>();
+        try {
+            connect = DataBase.connecDb();
+            prepare = connect.prepareStatement("SELECT classSectionName FROM classsection WHERE lecturerID = ?");
+            prepare.setString(1, lecturerID);
+            result = prepare.executeQuery();
+            while (result.next()) {
+                classSectionNames.add(result.getString("classSectionName"));
+            }
+            return classSectionNames;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public String getLecturerName(String classSectionId) {
         try {
             connect = DataBase.connecDb();
@@ -189,6 +224,46 @@ public class ClassSectionDAO {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public List<CourseInfo> getCoursesData(){
+        String id = new AccountDAO().getUserTypeID(new AccountDAO().getCurrentAccount().getAccountID());
+
+        List<CourseInfo> courses = new ArrayList<>();
+        lecturerDashBoardController x = new lecturerDashBoardController();
+
+        try{
+            connect = DataBase.connecDb();
+            prepare = connect.prepareStatement("SELECT * FROM classsection WHERE lecturerID = ?");
+            prepare.setString(1, id);
+            result = prepare.executeQuery();
+            int stt = 0;
+            while(result.next()){
+                String classSectionID = result.getString("classSectionID");
+                int enrolled = new StudentClassSectionDAO().getEnrolledStudents(classSectionID);
+                String classSectionName = result.getString("classSectionName");
+                CourseInfo course = x.new CourseInfo(++stt, classSectionID, classSectionName, enrolled);
+                courses.add(course);
+            }
+            return courses;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public int getNumberCourses(String lecturerID){
+        try{
+            connect = DataBase.connecDb();
+            prepare = connect.prepareStatement("SELECT COUNT(*) FROM classsection WHERE lecturerID = ?");
+            prepare.setString(1, lecturerID);
+            result = prepare.executeQuery();
+            result.next();
+            return result.getInt(1);
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
         }
     }
 }

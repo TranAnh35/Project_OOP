@@ -276,4 +276,37 @@ public class StudentCourseProgressDAO {
             e.printStackTrace();
         }
     }
+
+    public int getNumberCourse(String studentId){
+        try{
+            connect = DataBase.connecDb();
+            String sql = "SELECT COUNT(*) FROM StudentCourseProgress WHERE studentID = ?";
+            prepare = connect.prepareStatement(sql);
+            prepare.setString(1, studentId);
+
+            result = prepare.executeQuery();
+            if(result.next()){
+                return result.getInt(1);
+            }
+            return 0;
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public void updateScore(String studentID, String courseID, double grade){
+        try{
+            connect = DataBase.connecDb();
+            String sql = "UPDATE StudentCourseProgress SET finalgrade = ? WHERE studentID = ? AND courseID = ?";
+            prepare = connect.prepareStatement(sql);
+            prepare.setDouble(1, grade);
+            prepare.setString(2, studentID);
+            prepare.setString(3, courseID);
+
+            prepare.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

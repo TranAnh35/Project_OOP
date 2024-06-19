@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import demo.Data.DataBase;
+import demo.Entity.Lecturer;
 
 public class LecturerDAO {
     private Connection connect;
@@ -30,5 +31,23 @@ public class LecturerDAO {
             e.printStackTrace();
         }
         return firstName + " " + lastName;
+    }
+
+    public void updateLecturer(Lecturer lecturer, String LecturerID){
+        try{
+            connect = DataBase.connecDb();
+            String sql = "UPDATE Lecturer SET firstName = ?, lastName = ?, phoneNumber = ?, email = ?, gender = ? WHERE LecturerID = ?;";
+            prepare = connect.prepareStatement(sql);
+            prepare.setString(1, lecturer.getFirstName());
+            prepare.setString(2, lecturer.getLastName());
+            prepare.setString(3, lecturer.getPhoneNumber());
+            prepare.setString(4, lecturer.getEmail());
+            prepare.setString(5, lecturer.getGender());
+            prepare.setString(6, LecturerID);
+
+            prepare.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }

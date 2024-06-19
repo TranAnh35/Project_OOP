@@ -111,8 +111,14 @@ public class AccountDAO {
             result = prepare.executeQuery();
 
             if(result.next()){
-                String hashedPassFromDb = result.getString("password");
-                rs = checkPassword(password, hashedPassFromDb);
+                String userType = result.getString("UserType");
+                if(userType.equals("Student")){
+                    String hashedPassFromDb = result.getString("password");
+                    rs = checkPassword(password, hashedPassFromDb);
+                }else{
+                    String hashedPassFromDb = result.getString("password");
+                    rs = password.equals(hashedPassFromDb);
+                }
             }
 
         }catch(Exception e){

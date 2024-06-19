@@ -91,4 +91,21 @@ public class CourseDAO {
             return null;
         }
     }
+
+    // Hàm lấy học phí của 1 khóa học
+    public double getTuitionFee(String courseID){
+        try {
+            connect = DataBase.connecDb();
+            prepare = connect.prepareStatement("SELECT tuitionFee FROM course WHERE courseID = ?");
+            prepare.setString(1, courseID);
+            result = prepare.executeQuery();
+            if(result.next()){
+                return result.getDouble("tuitionFee");
+            }
+            return -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }

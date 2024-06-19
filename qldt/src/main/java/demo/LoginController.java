@@ -72,7 +72,7 @@ public class LoginController implements Initializable {
     public void login(){
         String user = username.getText();
         String pass = password.getText();
-
+        
         try{
             boolean result = new AccountDAO().loginAccount(user, pass);
 
@@ -104,7 +104,10 @@ public class LoginController implements Initializable {
                         alert.setHeaderText(null);
                         alert.setContentText("Login Successful");
                         alert.showAndWait();
-                        switchToDashBoard();
+                        if(userType.equals("Student"))
+                            switchToDashBoard();
+                        else
+                            switchToLecturerDashBoard();
                     }else{
                         alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error Message");
@@ -134,6 +137,34 @@ public class LoginController implements Initializable {
         signUpBtn.getScene().getWindow().hide();
         Parent root = App.loadFXML("SignUp");
 
+        root.setOnMousePressed((MouseEvent event) -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
+        });
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        
+        root.setOnMouseDragged((MouseEvent event) -> {
+            stage.setX(event.getScreenX() - x);
+            stage.setY(event.getScreenY() - y);
+
+            stage.setOpacity(0.8);
+        });
+
+        root.setOnMouseReleased((MouseEvent event) -> {
+            stage.setOpacity(1.0);
+        });
+
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void switchToLecturerDashBoard() throws IOException {
+        loginBtn.getScene().getWindow().hide();
+        Parent root = App.loadFXML("LecturerDashBoard");
         root.setOnMousePressed((MouseEvent event) -> {
             x = event.getSceneX();
             y = event.getSceneY();

@@ -8,6 +8,7 @@ import demo.Course.ClassSection;
 import demo.DAO.AccountDAO;
 import demo.DAO.ClassSectionDAO;
 import demo.DAO.LecturerDAO;
+import demo.DAO.PaymentDAO;
 import demo.DAO.StudentClassSectionDAO;
 import demo.DAO.StudentCourseProgressDAO;
 import javafx.fxml.FXML;
@@ -58,6 +59,7 @@ public class CourseSectionUnRegisterController implements Initializable{
             studentClassSection.removeStudentClassSection(classSectionID, studentID);
             if(studentClassSection.getNumberOfClassSectionByCourseID(courseID) == 0){
                 new StudentCourseProgressDAO().removeStudentCourseProgress(studentID, courseID);
+                new PaymentDAO().deletePayment(studentID, courseID);
             }
             classSection.updateEnrolled(classSectionID);
             alert = new Alert(AlertType.INFORMATION);

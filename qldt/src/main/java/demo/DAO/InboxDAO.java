@@ -178,4 +178,22 @@ public class InboxDAO {
         }
         return null;
     }
+
+    public int getNumberNotification(int receiverID){
+        int count = 0;
+        try{
+            connect = DataBase.connecDb();
+            String sql = "SELECT COUNT(*) FROM Email WHERE receiverID = ?";
+            prepare = connect.prepareStatement(sql);
+            prepare.setInt(1, receiverID);
+
+            result = prepare.executeQuery();
+            while(result.next()){
+                count = result.getInt(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return count;
+    }
 }

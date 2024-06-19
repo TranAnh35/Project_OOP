@@ -2,7 +2,6 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import java.lang.String?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
@@ -26,7 +25,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="demo.dashBoardController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="demo.lecturerDashBoardController">
    <children>
       <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -108,12 +107,6 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                               </Button>
-                              <Button fx:id="Register_btn" layoutX="4.0" layoutY="167.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="38.0" prefWidth="180.0" stylesheets="@../DashBoardDesign.css" text="Register" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="157.0">
-                                 <styleClass>
-                                    <String fx:value="nav-btn" />
-                                    <String fx:value="shadow" />
-                                 </styleClass>
-                              </Button>
                               <Button fx:id="logout" layoutX="-2.0" layoutY="339.0" mnemonicParsing="false" onAction="#logout" styleClass="signout" stylesheets="@../DashBoardDesign.css" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" size="1.5em" />
@@ -124,13 +117,13 @@
                                     <Font name="Tahoma" size="15.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="InboxForm_btn" layoutX="12.0" layoutY="210.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="38.0" prefWidth="180.0" text="Inbox" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="206.0">
+                              <Button fx:id="InboxForm_btn" layoutX="12.0" layoutY="156.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="38.0" prefWidth="180.0" text="Inbox" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="156.0">
                                  <styleClass>
                                     <String fx:value="nav-btn" />
                                     <String fx:value="shadow" />
                                  </styleClass>
                               </Button>
-                              <Button fx:id="Setting_btn" layoutX="72.0" layoutY="258.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="38.0" text="Setting" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="255.0">
+                              <Button fx:id="Setting_btn" layoutX="11.0" layoutY="204.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="38.0" text="Setting" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="204.0">
                                  <styleClass>
                                     <String fx:value="nav-btn" />
                                     <String fx:value="shadow" />
@@ -182,21 +175,23 @@
                                                 <Font name="Tahoma Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                       </children></AnchorPane>
+                                       </children>
+                                    </AnchorPane>
                                     <AnchorPane layoutX="448.0" layoutY="14.0" prefHeight="115.0" prefWidth="217.0" styleClass="card" stylesheets="@../DashBoardDesign.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="599.0" AnchorPane.topAnchor="5.0">
                                        <children>
                                           <FontAwesomeIcon fill="WHITE" glyphName="MONEY" layoutX="14.0" layoutY="87.0" size="5em" AnchorPane.leftAnchor="26.0" />
-                                          <Label layoutX="106.0" layoutY="123.0" text="Tuition Debt" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                          <Label layoutX="106.0" layoutY="123.0" text="Fines" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                              <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="dashBoard_Tuition" alignment="CENTER_RIGHT" layoutX="151.0" layoutY="13.0" prefHeight="19.0" prefWidth="183.0" text="0" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                          <Label fx:id="dashBoard_Fines" alignment="CENTER_RIGHT" layoutX="151.0" layoutY="13.0" prefHeight="19.0" prefWidth="183.0" text="0" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                              <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                       </children></AnchorPane>
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="5.0" layoutY="180.0" prefHeight="376.0" prefWidth="877.0" stylesheets="@Design/DashBoardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="180.0">
@@ -212,12 +207,12 @@
                                        </styleClass>
                                        <children>
                                           <BarChart layoutX="-111.0" layoutY="-41.0" prefHeight="359.0" prefWidth="389.0" title="Number of courses per semester" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <xAxis>
-                                              <CategoryAxis side="BOTTOM" />
-                                            </xAxis>
-                                            <yAxis>
-                                              <NumberAxis side="LEFT" />
-                                            </yAxis>
+                                             <xAxis>
+                                                <CategoryAxis side="BOTTOM" />
+                                             </xAxis>
+                                             <yAxis>
+                                                <NumberAxis side="LEFT" />
+                                             </yAxis>
                                           </BarChart>
                                        </children>
                                     </AnchorPane>
@@ -228,12 +223,12 @@
                                        </styleClass>
                                        <children>
                                           <LineChart layoutX="-114.0" layoutY="-16.0" prefHeight="384.0" prefWidth="400.0" title="GPA per semester" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <xAxis>
-                                              <CategoryAxis side="BOTTOM" />
-                                            </xAxis>
-                                            <yAxis>
-                                              <NumberAxis side="LEFT" />
-                                            </yAxis>
+                                             <xAxis>
+                                                <CategoryAxis side="BOTTOM" />
+                                             </xAxis>
+                                             <yAxis>
+                                                <NumberAxis side="LEFT" />
+                                             </yAxis>
                                           </LineChart>
                                        </children>
                                     </AnchorPane>
@@ -241,7 +236,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="Course_form" layoutX="79.0" layoutY="129.0" prefHeight="555.0" prefWidth="887.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="Course_form" layoutX="79.0" layoutY="129.0" prefHeight="555.0" prefWidth="887.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@Design/DashBoardDesign.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                  <styleClass>
@@ -255,17 +250,14 @@
                                        </font>
                                     </TextField>
                                     <FontAwesomeIcon glyphName="SEARCH" layoutX="29.0" layoutY="41.0" size="1.5em" text="" />
-                                    <TableView fx:id="Course_table" layoutX="20.0" layoutY="76.0" prefHeight="324.0" prefWidth="286.0" styleClass="table-column" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="76.0">
-                                      <columns>
-                                        <TableColumn fx:id="Course_col_STT" prefWidth="75.0" text="STT" />
-                                        <TableColumn fx:id="Course_col_ID" prefWidth="172.0" text="Mã" />
-                                          <TableColumn fx:id="Course_col_name" prefWidth="180.0" text="Môn học" />
-                                          <TableColumn fx:id="Course_col_Status" prefWidth="167.0" text="Trạng thái" />
-                                          <TableColumn fx:id="Course_col_Times" prefWidth="125.0" text="Số lần học" />
-                                          <TableColumn fx:id="Course_col_grade" prefWidth="116.0" text="Điểm" />
-                                      </columns>
+                                    <TableView fx:id="Course_table" layoutX="19.0" layoutY="67.0" onMouseClicked="#clickCourse" prefHeight="324.0" prefWidth="286.0" styleClass="table-column" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="70.0">
+                                       <columns>
+                                          <TableColumn fx:id="Course_col_STT" prefWidth="75.0" text="STT" />
+                                          <TableColumn fx:id="Course_col_ID" prefWidth="172.0" text="Mã" />
+                                          <TableColumn fx:id="Course_col_name" prefWidth="433.0" text="Môn học" />
+                                          <TableColumn fx:id="Course_col_enrolled" prefWidth="152.0" text="Sĩ số" />
+                                       </columns>
                                     </TableView>
-                                    <ComboBox fx:id="Course_choose_status" layoutX="248.0" layoutY="23.0" onAction="#actionChooseStatus" prefHeight="30.0" prefWidth="200.0" promptText="Choose" styleClass="search" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="20.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -348,7 +340,8 @@
                                                 </VBox>
                                              </content>
                                           </ScrollPane>
-                                       </children></AnchorPane>
+                                       </children>
+                                    </AnchorPane>
                                     <AnchorPane fx:id="Inbox_WriteForm" prefHeight="545.0" prefWidth="740.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <Label layoutX="14.0" layoutY="14.0" text="Soạn tin nhắn">
@@ -464,7 +457,8 @@
                                           <Separator layoutX="4.0" layoutY="505.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                           <Button fx:id="Inbox_send_btn" layoutX="680.0" layoutY="508.0" mnemonicParsing="false" onAction="#sendInbox" prefHeight="29.0" prefWidth="61.0" styleClass="signout" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="513.0" />
                                           <TextArea fx:id="Inbox_body" layoutX="4.0" layoutY="196.0" prefHeight="309.0" prefWidth="740.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                       </children></AnchorPane>
+                                       </children>
+                                    </AnchorPane>
                                     <AnchorPane fx:id="Inbox_SentForm" layoutX="10.0" layoutY="10.0" prefHeight="555.0" prefWidth="750.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <FontAwesomeIcon glyphName="SEARCH" layoutX="14.0" layoutY="31.0" size="1.5em" text="" visible="false" wrappingWidth="16.714284896850586" />
@@ -493,121 +487,6 @@
                                           </ScrollPane>
                                        </children>
                                     </AnchorPane>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="Register_form" prefHeight="555.0" prefWidth="887.0" stylesheets="@Design/DashBoardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <AnchorPane layoutX="28.0" layoutY="341.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="215.0">
-                                 <styleClass>
-                                    <String fx:value="nav2" />
-                                    <String fx:value="shadow" />
-                                 </styleClass>
-                                 <children>
-                                    <ScrollPane layoutX="53.0" layoutY="68.0" prefHeight="335.0" prefWidth="877.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <content>
-                                          <VBox fx:id="Register_SC_layout" prefHeight="333.0" prefWidth="875.0" spacing="10.0" styleClass="table-view">
-                                             <children>
-                                                <HBox fx:id="Register_SC_Title" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="875.0" styleClass="column-header-background">
-                                                   <children>
-                                                      <Label prefHeight="21.0" prefWidth="373.0" styleClass="table-column" text="Course Section Name" textFill="WHITE">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                         <opaqueInsets>
-                                                            <Insets />
-                                                         </opaqueInsets>
-                                                         <HBox.margin>
-                                                            <Insets />
-                                                         </HBox.margin>
-                                                      </Label>
-                                                      <Label prefHeight="21.0" prefWidth="256.0" styleClass="table-column" text="Main Lecturer" textFill="WHITE">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="21.0" prefWidth="124.0" styleClass="table-column" text="Enrolled" textFill="WHITE">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label alignment="CENTER" prefHeight="27.0" prefWidth="117.0" text="Action" textFill="WHITE">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </content>
-                                       <styleClass>
-                                          <String fx:value="nav2" />
-                                          <String fx:value="shadow" />
-                                       </styleClass>
-                                    </ScrollPane>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="870.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                                 <styleClass>
-                                    <String fx:value="nav2" />
-                                    <String fx:value="shadow" />
-                                 </styleClass>
-                                 <children>
-                                    <TextField fx:id="Register_search" layoutX="14.0" layoutY="14.0" onKeyTyped="#registerSearchCourse" prefHeight="25.0" prefWidth="164.0" promptText="Search" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
-                                       <styleClass>
-                                          <String fx:value="textfield" />
-                                          <String fx:value="search" />
-                                       </styleClass>
-                                    </TextField>
-                                    <FontAwesomeIcon glyphName="SEARCH" layoutX="21.0" layoutY="33.0" size="1.5em" wrappingWidth="11.0" />
-                                    <Separator layoutX="193.0" orientation="VERTICAL" prefHeight="200.0" />
-                                    <ComboBox fx:id="Register_status" layoutX="14.0" layoutY="79.0" prefHeight="25.0" prefWidth="164.0" promptText="Chose" styleClass="search" />
-                                    <Label layoutX="15.0" layoutY="58.0" text="Status:">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <TableView fx:id="Register_CourseName_table" layoutX="199.0" layoutY="4.0" onMouseClicked="#actionClickNameCourse" prefHeight="190.0" prefWidth="305.0" styleClass="table-column" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="5.0">
-                                      <columns>
-                                        <TableColumn fx:id="Register_CourseName_col" prefWidth="299.0" text="Courses" />
-                                      </columns>
-                                    </TableView>
-                                    <Separator layoutX="508.0" orientation="VERTICAL" prefHeight="200.0" />
-                                    <TableView fx:id="Register_Info_table" layoutX="514.0" layoutY="74.0" prefHeight="121.0" prefWidth="357.0" styleClass="table-column" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="515.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="74.0">
-                                      <columns>
-                                        <TableColumn fx:id="Register_CourseID_col" prefWidth="101.0" text="CourseID" />
-                                        <TableColumn fx:id="Register_Tuition_col" prefWidth="159.0" text="Tuition Fee" />
-                                          <TableColumn fx:id="Register_Credits_col" prefWidth="91.0" text="Credits" />
-                                      </columns>
-                                    </TableView>
-                                    <Label layoutX="605.0" layoutY="14.0" text="Information Of Course">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                       <textFill>
-                                          <LinearGradient endX="1.0" endY="1.0">
-                                             <stops>
-                                                <Stop>
-                                                   <color>
-                                                      <Color red="0.2878289520740509" green="0.9868420958518982" blue="0.8819901347160339" />
-                                                   </color>
-                                                </Stop>
-                                                <Stop offset="0.9899328859060402">
-                                                   <color>
-                                                      <Color red="0.08771929889917374" green="0.8184210658073425" blue="0.9473684430122375" />
-                                                   </color>
-                                                </Stop>
-                                                <Stop offset="1.0">
-                                                   <color>
-                                                      <Color red="0.08771929889917374" green="0.8184210658073425" blue="0.9473684430122375" />
-                                                   </color>
-                                                </Stop>
-                                             </stops>
-                                          </LinearGradient>
-                                       </textFill>
-                                    </Label>
                                  </children>
                               </AnchorPane>
                            </children>
@@ -652,7 +531,7 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <AnchorPane fx:id="Setting_changeInFo_form" layoutX="94.0" layoutY="94.0" prefHeight="545.0" prefWidth="672.0" stylesheets="@Design/DashBoardDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane fx:id="Setting_changeInFo_form" layoutX="94.0" layoutY="94.0" prefHeight="545.0" prefWidth="672.0" stylesheets="@Design/DashBoardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <Label layoutX="232.0" layoutY="14.0" text="Change Information" textAlignment="CENTER">
                                              <font>
@@ -686,12 +565,9 @@
                                           <Button fx:id="Setting_ChangeInfo_Save_btn" layoutX="583.0" layoutY="500.0" mnemonicParsing="false" onAction="#saveSettingChangeInfoData" prefHeight="30.0" prefWidth="75.0" styleClass="signout" text="Save" textFill="WHITE">
                                              <font>
                                                 <Font size="15.0" />
-                                             </font></Button>
+                                             </font>
+                                          </Button>
                                           <ComboBox fx:id="Setting_ChangeInfo_Gender" layoutX="374.0" layoutY="193.0" onAction="#setSettingChangeInfoData" prefHeight="30.0" prefWidth="224.0" promptText="Gender" styleClass="textfield" AnchorPane.rightAnchor="75.0" />
-                                          <TextField fx:id="Setting_ChangeInfo_City" layoutX="75.0" layoutY="273.0" onAction="#setSettingChangeInfoData" prefHeight="30.0" prefWidth="224.0" promptText="Province/City" styleClass="textfield" />
-                                          <TextField fx:id="Setting_ChangeInfo_District" layoutX="373.0" layoutY="273.0" onAction="#setSettingChangeInfoData" prefHeight="30.0" prefWidth="224.0" promptText="District" styleClass="textfield" />
-                                          <TextField fx:id="Setting_ChangeInfo_Ward" layoutX="75.0" layoutY="358.0" onAction="#setSettingChangeInfoData" prefHeight="30.0" prefWidth="224.0" promptText="Ward" styleClass="textfield" />
-                                          <TextField fx:id="Setting_ChangeInfo_Street" layoutX="374.0" layoutY="358.0" onAction="#setSettingChangeInfoData" prefHeight="30.0" prefWidth="224.0" promptText="Street" styleClass="textfield" />
                                           <Label layoutX="75.0" layoutY="77.0" text="First Name:">
                                              <font>
                                                 <Font size="15.0" />
@@ -796,7 +672,7 @@
                                                 </LinearGradient>
                                              </textFill>
                                           </Label>
-                                          <Label layoutX="75.0" layoutY="241.0" text="Province/City:">
+                                          <Label layoutX="75.0" layoutY="244.0" text="Email:">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -822,111 +698,7 @@
                                                 </LinearGradient>
                                              </textFill>
                                           </Label>
-                                          <Label layoutX="373.0" layoutY="241.0" text="District:">
-                                             <font>
-                                                <Font size="15.0" />
-                                             </font>
-                                             <textFill>
-                                                <LinearGradient endX="1.0" endY="1.0">
-                                                   <stops>
-                                                      <Stop>
-                                                         <color>
-                                                            <Color red="0.3803921639919281" green="0.9333333373069763" blue="0.8705882430076599" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="0.9832214765100671">
-                                                         <color>
-                                                            <Color red="0.22612085938453674" green="0.7599740028381348" blue="0.8421052694320679" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="1.0">
-                                                         <color>
-                                                            <Color red="0.22612085938453674" green="0.7599740028381348" blue="0.8421052694320679" />
-                                                         </color>
-                                                      </Stop>
-                                                   </stops>
-                                                </LinearGradient>
-                                             </textFill>
-                                          </Label>
-                                          <Label layoutX="75.0" layoutY="324.0" text="Ward:">
-                                             <font>
-                                                <Font size="15.0" />
-                                             </font>
-                                             <textFill>
-                                                <LinearGradient endX="1.0" endY="1.0">
-                                                   <stops>
-                                                      <Stop>
-                                                         <color>
-                                                            <Color red="0.3803921639919281" green="0.9333333373069763" blue="0.8705882430076599" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="0.9832214765100671">
-                                                         <color>
-                                                            <Color red="0.22612085938453674" green="0.7599740028381348" blue="0.8421052694320679" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="1.0">
-                                                         <color>
-                                                            <Color red="0.22612085938453674" green="0.7599740028381348" blue="0.8421052694320679" />
-                                                         </color>
-                                                      </Stop>
-                                                   </stops>
-                                                </LinearGradient>
-                                             </textFill>
-                                          </Label>
-                                          <Label layoutX="373.0" layoutY="324.0" text="Street:">
-                                             <font>
-                                                <Font size="15.0" />
-                                             </font>
-                                             <textFill>
-                                                <LinearGradient endX="1.0" endY="1.0">
-                                                   <stops>
-                                                      <Stop>
-                                                         <color>
-                                                            <Color red="0.3803921639919281" green="0.9333333373069763" blue="0.8705882430076599" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="0.9832214765100671">
-                                                         <color>
-                                                            <Color red="0.22612085938453674" green="0.7599740028381348" blue="0.8421052694320679" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="1.0">
-                                                         <color>
-                                                            <Color red="0.22612085938453674" green="0.7599740028381348" blue="0.8421052694320679" />
-                                                         </color>
-                                                      </Stop>
-                                                   </stops>
-                                                </LinearGradient>
-                                             </textFill>
-                                          </Label>
-                                          <Label layoutX="75.0" layoutY="415.0" text="Email:">
-                                             <font>
-                                                <Font size="15.0" />
-                                             </font>
-                                             <textFill>
-                                                <LinearGradient endX="1.0" endY="1.0">
-                                                   <stops>
-                                                      <Stop>
-                                                         <color>
-                                                            <Color red="0.3803921639919281" green="0.9333333373069763" blue="0.8705882430076599" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="0.9832214765100671">
-                                                         <color>
-                                                            <Color red="0.22612085938453674" green="0.7599740028381348" blue="0.8421052694320679" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="1.0">
-                                                         <color>
-                                                            <Color red="0.22612085938453674" green="0.7599740028381348" blue="0.8421052694320679" />
-                                                         </color>
-                                                      </Stop>
-                                                   </stops>
-                                                </LinearGradient>
-                                             </textFill>
-                                          </Label>
-                                          <TextField fx:id="Setting_ChangeInfo_Email" layoutX="75.0" layoutY="443.0" onAction="#setSettingChangeInfoData" prefHeight="30.0" prefWidth="224.0" promptText="Email" styleClass="textfield" />
+                                          <TextField fx:id="Setting_ChangeInfo_Email" layoutX="75.0" layoutY="273.0" onAction="#setSettingChangeInfoData" prefHeight="30.0" prefWidth="224.0" promptText="Email" styleClass="textfield" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane fx:id="Setting_changePass_form" layoutX="116.0" layoutY="73.0" prefHeight="545.0" prefWidth="672.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -967,7 +739,7 @@
                                           </Button>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="Setting_InFo_Form" prefHeight="545.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane fx:id="Setting_InFo_Form" prefHeight="545.0" prefWidth="672.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <Label layoutX="258.0" layoutY="26.0" text="Information">
                                              <textFill>
@@ -1125,32 +897,6 @@
                                                 </LinearGradient>
                                              </textFill>
                                           </Label>
-                                          <Label layoutX="66.0" layoutY="368.0" text="Address:">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                             <textFill>
-                                                <LinearGradient endX="1.0" endY="1.0">
-                                                   <stops>
-                                                      <Stop>
-                                                         <color>
-                                                            <Color red="0.3803921639919281" green="0.9333333373069763" blue="0.8705882430076599" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="0.006711409395973154">
-                                                         <color>
-                                                            <Color red="0.3803921639919281" green="0.9333333373069763" blue="0.8705882430076599" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="1.0">
-                                                         <color>
-                                                            <Color red="0.03921568766236305" green="0.8666666746139526" blue="0.8274509906768799" />
-                                                         </color>
-                                                      </Stop>
-                                                   </stops>
-                                                </LinearGradient>
-                                             </textFill>
-                                          </Label>
                                           <Label fx:id="Setting_InFo_FName" layoutX="165.0" layoutY="90.0" prefHeight="27.0" prefWidth="214.0" text="Phùng">
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
@@ -1256,32 +1002,6 @@
                                              </textFill>
                                           </Label>
                                           <Label fx:id="Setting_InFo_ID" layoutX="170.0" layoutY="226.0" prefHeight="27.0" prefWidth="143.0" text="SV-002">
-                                             <font>
-                                                <Font name="System Bold" size="18.0" />
-                                             </font>
-                                             <textFill>
-                                                <LinearGradient endX="1.0" endY="1.0">
-                                                   <stops>
-                                                      <Stop>
-                                                         <color>
-                                                            <Color red="0.3803921639919281" green="0.9333333373069763" blue="0.8705882430076599" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="0.9832214765100671">
-                                                         <color>
-                                                            <Color red="0.22612085938453674" green="0.7599740028381348" blue="0.8421052694320679" />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="1.0">
-                                                         <color>
-                                                            <Color red="0.22612085938453674" green="0.7599740028381348" blue="0.8421052694320679" />
-                                                         </color>
-                                                      </Stop>
-                                                   </stops>
-                                                </LinearGradient>
-                                             </textFill>
-                                          </Label>
-                                          <Label fx:id="Setting_InFo_Address" layoutX="144.0" layoutY="368.0" prefHeight="27.0" prefWidth="501.0">
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
                                              </font>

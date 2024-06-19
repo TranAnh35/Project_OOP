@@ -1,9 +1,5 @@
 package demo;
 
-/*
- * Class này dùng để hiển thị giao diện của trang chính
- */
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -12,20 +8,14 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import demo.Account.CurrentAccount;
-import demo.Course.ClassSection;
-import demo.Course.Course;
 import demo.DAO.AccountDAO;
 import demo.DAO.ClassSectionDAO;
-import demo.DAO.CourseDAO;
 import demo.DAO.InboxDAO;
-import demo.DAO.PaymentDAO;
+import demo.DAO.LecturerDAO;
 import demo.DAO.StudentClassSectionDAO;
-import demo.DAO.StudentCourseProgressDAO;
 import demo.DAO.StudentDAO;
 import demo.Entity.Inbox;
 import demo.Entity.Lecturer;
-import demo.Entity.Student;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -54,16 +44,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class dashBoardController implements Initializable{
+public class lecturerDashBoardController implements Initializable{
+
     protected CurrentAccount currentAccount;
-    protected Student student;
     protected Lecturer lecturer;
+
+    public static Stage currentStage;
 
     @FXML
     private Button ChangePass_btn;
-
-    @FXML
-    private ComboBox<String> Course_choose_status;
 
     @FXML
     private Button Course_btn;
@@ -75,19 +64,10 @@ public class dashBoardController implements Initializable{
     private TableColumn<CourseInfo, Integer> Course_col_STT;
 
     @FXML
-    private TableColumn<CourseInfo, String> Course_col_Status;
-
-    @FXML
-    private TableColumn<CourseInfo, Integer> Course_col_Times;
-
-    @FXML
-    private TableColumn<CourseInfo, Double> Course_col_grade;
+    private TableColumn<CourseInfo, Integer> Course_col_enrolled;
 
     @FXML
     private TableColumn<CourseInfo, String> Course_col_name;
-
-    @FXML
-    private TableView<CourseInfo> Course_table;
 
     @FXML
     private AnchorPane Course_form;
@@ -96,34 +76,31 @@ public class dashBoardController implements Initializable{
     private TextField Course_search;
 
     @FXML
+    private TableView<CourseInfo> Course_table;
+
+    @FXML
     private Button DashBoard_btn;
 
     @FXML
     private Button InboxForm_btn;
 
     @FXML
-    private AnchorPane Inbox_InboxForm;
-
-    @FXML
-    private AnchorPane Inbox_SentForm;
-
-    @FXML
     private ComboBox<String> Inbox_Course;
 
     @FXML
-    private ComboBox<String> Inbox_Receiver;
-
-    @FXML
-    private VBox Inbox_Inbox_table;
+    private AnchorPane Inbox_InboxForm;
 
     @FXML
     private HBox Inbox_Inbox_Table_Tiltle;
 
     @FXML
-    private Button Inbox_Inbox_Delete_btn;
+    private VBox Inbox_Inbox_table;
 
     @FXML
-    private TextField Inbox_Inbox_Search;
+    private ComboBox<String> Inbox_Receiver;
+
+    @FXML
+    private AnchorPane Inbox_SentForm;
 
     @FXML
     private VBox Inbox_Sent_Table;
@@ -141,58 +118,19 @@ public class dashBoardController implements Initializable{
     private TextArea Inbox_body;
 
     @FXML
-    private ComboBox<String> Inbox_position;
-
-    @FXML
-    private Button Inbox_send_btn;
-
-    @FXML
     private Button Inbox_btn;
 
     @FXML
     private AnchorPane Inbox_form;
 
     @FXML
-    private Button Write_btn;
+    private ComboBox<String> Inbox_position;
+
+    @FXML
+    private Button Inbox_send_btn;
 
     @FXML
     private Button Info_btn;
-
-    @FXML
-    private Button Register_btn;
-
-    @FXML
-    private TableColumn<Course, String> Register_CourseID_col;
-
-    @FXML
-    private TableColumn<Course, String> Register_CourseName_col;
-
-    @FXML
-    private TableView<Course> Register_CourseName_table;
-
-    @FXML
-    private TableColumn<Course, Integer> Register_Credits_col;
-
-    @FXML
-    private TableView<Course> Register_Info_table;
-
-    @FXML
-    private TableColumn<Course, Double> Register_Tuition_col;
-
-    @FXML
-    private AnchorPane Register_form;
-
-    @FXML
-    private ComboBox<String> Register_status;
-
-    @FXML
-    private TextField Register_search;
-
-    @FXML
-    private VBox Register_SC_layout;
-
-    @FXML
-    private HBox Register_SC_Title;
 
     @FXML
     private Button Schedule_btn;
@@ -210,13 +148,13 @@ public class dashBoardController implements Initializable{
     private TextField Setting_ChangeInfo_District;
 
     @FXML
+    private TextField Setting_ChangeInfo_Email;
+
+    @FXML
     private TextField Setting_ChangeInfo_FName;
 
     @FXML
     private ComboBox<String> Setting_ChangeInfo_Gender;
-
-    @FXML
-    private TextField Setting_ChangeInfo_Email;
 
     @FXML
     private TextField Setting_ChangeInfo_LName;
@@ -234,16 +172,25 @@ public class dashBoardController implements Initializable{
     private TextField Setting_ChangeInfo_Ward;
 
     @FXML
-    private AnchorPane Setting_InFo_Form;
+    private TextField Setting_ChangePass_ComfirmNewPass;
 
     @FXML
-    private Label Setting_InFo_Address;
+    private TextField Setting_ChangePass_NewPass;
+
+    @FXML
+    private TextField Setting_ChangePass_OldPass;
+
+    @FXML
+    private Button Setting_ChangePass_Save_btn;
 
     @FXML
     private Label Setting_InFo_Email;
 
     @FXML
     private Label Setting_InFo_FName;
+
+    @FXML
+    private AnchorPane Setting_InFo_Form;
 
     @FXML
     private Label Setting_InFo_Gender;
@@ -267,19 +214,10 @@ public class dashBoardController implements Initializable{
     private AnchorPane Setting_changePass_form;
 
     @FXML
-    private TextField Setting_ChangePass_ComfirmNewPass;
-
-    @FXML
-    private TextField Setting_ChangePass_NewPass;
-
-    @FXML
-    private TextField Setting_ChangePass_OldPass;
-
-    @FXML
-    private Button Setting_ChangePass_Save_btn;
-
-    @FXML
     private AnchorPane Setting_form;
+
+    @FXML
+    private Button Write_btn;
 
     @FXML
     private Button changeInfo_btn;
@@ -288,13 +226,13 @@ public class dashBoardController implements Initializable{
     private Button close;
 
     @FXML
+    private Label dashBoard_Fines;
+
+    @FXML
     private Label dashBoard_NOC;
 
     @FXML
     private Label dashBoard_Noti;
-
-    @FXML
-    private Label dashBoard_Tuition;
 
     @FXML
     private AnchorPane dashBoard_form;
@@ -311,15 +249,15 @@ public class dashBoardController implements Initializable{
     @FXML
     private Label userName;
 
-    // Dashboard
-    public void displayNumberCourse(){
-        int numberCourse = new StudentCourseProgressDAO().getNumberCourse(currentAccount.getStudentID());
-        dashBoard_NOC.setText(String.valueOf(numberCourse));
+    @FXML
+    void Course_search(ActionEvent event) {
+
     }
 
-    public void displayTuition(){
-        double tuition = new PaymentDAO().getTotalPaymentByStudentId(currentAccount.getStudentID());
-        dashBoard_Tuition.setText(String.valueOf(tuition));
+    // Dashboard
+    public void displayNumberCourse(){
+        int numberCourse = new ClassSectionDAO().getNumberCourses(this.lecturer.getID());
+        dashBoard_NOC.setText(String.valueOf(numberCourse));
     }
 
     public void displayNotification(){
@@ -327,160 +265,54 @@ public class dashBoardController implements Initializable{
         dashBoard_Noti.setText(String.valueOf(numberNotification));
     }
 
-    // Course
-    private String[] courseStatus = {"All", "Completed", "Fail", "In progress"};
-
-    public void Course_status(){
-        List<String> listStatus = new ArrayList<>();
-
-        for(String s : courseStatus){
-            listStatus.add(s);
-        }
-
-        ObservableList<String> listData = FXCollections.observableArrayList(listStatus);
-
-        Course_choose_status.setItems(listData);
-    }
-
-    public void actionChooseStatus(ActionEvent e){
-        String status = Course_choose_status.getSelectionModel().getSelectedItem();
-        if(status == null){    setCourseData(); }
-        else if(status.equals("All")){    setCourseData();}
-        else if(status.equals("Completed")){    setCourseCompletedData();}
-        else if(status.equals("Fail")){    setCourseFailData();}
-        else if(status.equals("In progress")){    setCourseInProgressData();}
-    }
-
-    public class CourseInfo {
+    //COURSE
+    public class CourseInfo{
         private int STT;
-        private String courseID;
-        private String nameCourse;
-        private int times;
-        private double grade;
-        private String status;
+        private String ID;
+        private String name;
+        private int enrolled;
 
-        public CourseInfo(int STT, String courseID, String nameCourse, int times, double grade, String status){
+        public CourseInfo(int STT, String ID, String name, int enrolled){
             this.STT = STT;
-            this.courseID = courseID;
-            this.nameCourse = nameCourse;
-            this.times = times;
-            this.grade = grade;
-            this.status = status;
+            this.ID = ID;
+            this.name = name;
+            this.enrolled = enrolled;
         }
 
-        public int getSTT() {
+        public int getSTT(){
             return STT;
         }
 
-        public void setSTT(int STT) {
-            this.STT = STT;
+        public String getID(){
+            return ID;
         }
 
-        public String getCourseID() {
-            return courseID;
+        public String getName(){
+            return name;
         }
 
-        public void setCourseID(String courseID) {
-            this.courseID = courseID;
+        public int getEnrolled(){
+            return enrolled;
         }
-
-        public String getNameCourse() {
-            return nameCourse;
-        }
-
-        public void setNameCourse(String nameCourse) {
-            this.nameCourse = nameCourse;
-        }
-
-        public int getTimes() {
-            return times;
-        }
-
-        public void setTimes(int times) {
-            this.times = times;
-        }
-
-        public double getGrade() {
-            return grade;
-        }
-
-        public void setGrade(double grade) {
-            this.grade = grade;
-        }
-
-        public String getStatus() {
-            return status;
-        }
-
-        public void setStatus(String status) {
-            this.status = status;
-        }
-    }
-
-    public void setCourseCompletedData(){
-        List<CourseInfo> listData = new StudentCourseProgressDAO().setCourseCompletedData();
-
-        Course_col_STT.setCellValueFactory(new PropertyValueFactory<>("STT"));
-        Course_col_ID.setCellValueFactory(new PropertyValueFactory<>("courseID"));
-        Course_col_name.setCellValueFactory(new PropertyValueFactory<>("nameCourse"));
-        Course_col_Times.setCellValueFactory(new PropertyValueFactory<>("times"));
-        Course_col_grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
-        Course_col_Status.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        ObservableList<CourseInfo> data = FXCollections.observableArrayList(listData);
-
-        Course_table.setItems(data);
-    }
-
-    public void setCourseFailData(){
-        List<CourseInfo> listData = new StudentCourseProgressDAO().setCourseFailedData();
-
-        Course_col_STT.setCellValueFactory(new PropertyValueFactory<>("STT"));
-        Course_col_ID.setCellValueFactory(new PropertyValueFactory<>("courseID"));
-        Course_col_name.setCellValueFactory(new PropertyValueFactory<>("nameCourse"));
-        Course_col_Times.setCellValueFactory(new PropertyValueFactory<>("times"));
-        Course_col_grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
-        Course_col_Status.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        ObservableList<CourseInfo> data = FXCollections.observableArrayList(listData);
-
-        Course_table.setItems(data);
-    }
-
-    public void setCourseInProgressData(){
-        List<CourseInfo> listData = new StudentCourseProgressDAO().setCourseInProgressData();
-
-        Course_col_STT.setCellValueFactory(new PropertyValueFactory<>("STT"));
-        Course_col_ID.setCellValueFactory(new PropertyValueFactory<>("courseID"));
-        Course_col_name.setCellValueFactory(new PropertyValueFactory<>("nameCourse"));
-        Course_col_Times.setCellValueFactory(new PropertyValueFactory<>("times"));
-        Course_col_grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
-        Course_col_Status.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        ObservableList<CourseInfo> data = FXCollections.observableArrayList(listData);
-
-        Course_table.setItems(data);
     }
 
     public void setCourseData(){
-        List<CourseInfo> listData = new StudentCourseProgressDAO().getCourses();
+        List<CourseInfo> listCourse = new ClassSectionDAO().getCoursesData();
 
+        
         Course_col_STT.setCellValueFactory(new PropertyValueFactory<>("STT"));
-        Course_col_ID.setCellValueFactory(new PropertyValueFactory<>("courseID"));
-        Course_col_name.setCellValueFactory(new PropertyValueFactory<>("nameCourse"));
-        Course_col_Times.setCellValueFactory(new PropertyValueFactory<>("times"));
-        Course_col_grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
-        Course_col_Status.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        ObservableList<CourseInfo> data = FXCollections.observableArrayList(listData);
-
-        Course_table.setItems(data);
+        Course_col_ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        Course_col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        Course_col_enrolled.setCellValueFactory(new PropertyValueFactory<>("enrolled"));
+        
+        ObservableList<CourseInfo> listData = FXCollections.observableArrayList(listCourse);
+        Course_table.setItems(listData);
     }
 
     public void Course_search(){
         FilteredList<CourseInfo> filteredData = new FilteredList<>(Course_table.getItems(), p -> true);
-        Course_search.textProperty().addListener((observable, oldValue, newValue) -> {
 
+        Course_search.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(course -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
@@ -488,9 +320,9 @@ public class dashBoardController implements Initializable{
 
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (course.getNameCourse().toLowerCase().contains(lowerCaseFilter)) {
+                if (course.getName().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                } else if (course.getCourseID().toLowerCase().contains(lowerCaseFilter)) {
+                } else if (course.getID().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }else{
                     return false;
@@ -504,145 +336,55 @@ public class dashBoardController implements Initializable{
         });
     }
 
-    // Register
-    private String[] registerStatus = {"All", "Registered", "Not registered"};
+    public void clickCourse(){
+        Course_table.setOnMouseClicked(event -> {
+                CourseInfo course = Course_table.getSelectionModel().getSelectedItem();
+                String classSectionID = course.getID();
+                List<String> studentIDList = new StudentClassSectionDAO().getStudents(classSectionID);
+                List<String> studentNameList = new ArrayList<>();
+                for(String studentID : studentIDList){
+                    studentNameList.add(new StudentDAO().getStudentName(studentID));
+                }
+                if (course != null) {
+                    SharedData.getInstance().setClassSectionID(classSectionID);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseDetail.fxml"));
+                    Parent root;
+                    try {
+                        root = loader.load();
+                        CourseDetailController controller = loader.getController();
+                        controller.initData(studentIDList, studentNameList); 
 
-    public void Register_status(){
-        List<String> listStatus = new ArrayList<>();
-
-        for(String s : registerStatus){
-            listStatus.add(s);
-        }
-
-        ObservableList<String> listData = FXCollections.observableArrayList(listStatus);
-
-        Register_status.setItems(listData);
-    }
-
-    private ObservableList<Course> listData = new CourseDAO().getCourses();
+                        Stage classListStage = new Stage();
+                        root.setOnMousePressed((MouseEvent mouseEvent) -> {
+                            x = mouseEvent.getSceneX();
+                            y = mouseEvent.getSceneY();
+                        });
+                        root.setOnMouseDragged((MouseEvent mouseEvent) -> {
+                            classListStage.setX(mouseEvent.getScreenX() - x);
+                            classListStage.setY(mouseEvent.getScreenY() - y);
     
-    public void registerShowNameCourse(){
+                            classListStage.setOpacity(0.8);
+                        });
+    
+                        root.setOnMouseReleased((MouseEvent mouseEvent) -> {
+                            classListStage.setOpacity(1.0);
+                        });
+                        
+                        classListStage.initStyle(StageStyle.TRANSPARENT);
 
-        Register_CourseName_col.setCellValueFactory(new PropertyValueFactory<>("nameCourse"));
+                        currentStage = (Stage) Course_table.getScene().getWindow();
+                        currentStage.hide();
 
-        Register_CourseName_table.setItems(listData);
-    }
-
-    public void actionClickNameCourse(MouseEvent e){
-        registerShowInfoCourse();
-        Register_SC_layout.getChildren().clear();
-        Register_SC_layout.getChildren().add(Register_SC_Title);
-        String status = Register_status.getSelectionModel().getSelectedItem();
-        if(status == null){    setCourseSectionData(); }
-        else if(status.equals("All")){    setCourseSectionData();}
-        else if(status.equals("Not registered")){    registerNotRegisteredCourseSection();}
-        else if(status.equals("Registered")){    registerRegisteredCourseSection();}
-    }
-
-    public void registerShowInfoCourse(){
-        Course course = Register_CourseName_table.getSelectionModel().getSelectedItem();
-
-        int index = Register_CourseName_table.getSelectionModel().getSelectedIndex();
-
-        if((index - 1) < -1){
-            return;
-        }
-
-        Register_CourseID_col.setCellValueFactory(new PropertyValueFactory<>("courseID"));
-        Register_Tuition_col.setCellValueFactory(new PropertyValueFactory<>("tuitionFee"));
-        Register_Credits_col.setCellValueFactory(new PropertyValueFactory<>("credits"));
-
-        ObservableList<Course> data = FXCollections.observableArrayList(course);
-        
-        Register_Info_table.setItems(data);
-    }
-
-    public void setCourseSectionData(){
-        Course course = Register_CourseName_table.getSelectionModel().getSelectedItem();
-        String courseID = course.getCourseID();
-        List<ClassSection> classSectionList = new ClassSectionDAO().getClassSections(courseID);
-
-        for(ClassSection classSection : classSectionList){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseSectionRegister.fxml"));
-            try {
-                HBox hbox = loader.load();
-                CourseSectionController controller = loader.getController();
-                controller.setData(classSection);
-                Register_SC_layout.getChildren().add(hbox);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void registerNotRegisteredCourseSection(){
-        Course course = Register_CourseName_table.getSelectionModel().getSelectedItem();
-        String courseID = course.getCourseID();
-        List<ClassSection> classSectionList = new ClassSectionDAO().getClassSections(courseID);
-
-        for(ClassSection classSection : classSectionList){
-            if(!(new StudentClassSectionDAO().isEnrolled(classSection.getClassSectionID(), currentAccount.getStudentID()))){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseSectionRegister.fxml"));
-                try {
-                    HBox hbox = loader.load();
-                    CourseSectionController controller = loader.getController();
-                    controller.setData(classSection);
-                    Register_SC_layout.getChildren().add(hbox);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                        classListStage.setScene(new Scene(root));
+                        classListStage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }
-    }
-
-    public void registerRegisteredCourseSection(){
-        Course course = Register_CourseName_table.getSelectionModel().getSelectedItem();
-        String courseID = course.getCourseID();
-        List<ClassSection> classSectionList = new ClassSectionDAO().getClassSections(courseID);
-
-        for(ClassSection classSection : classSectionList){
-            if(new StudentClassSectionDAO().isEnrolled(classSection.getClassSectionID(), currentAccount.getStudentID())){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseSectionUnRegister.fxml"));
-                try {
-                    HBox hbox = loader.load();
-                    CourseSectionUnRegisterController controller = loader.getController();
-                    controller.setData(classSection);
-                    Register_SC_layout.getChildren().add(hbox);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void registerSearchCourse(){
-        Register_search.textProperty().addListener((observable, oldValue, newValue) -> {
-            FilteredList<Course> filteredData = new FilteredList<>(listData, p -> true);
-
-            filteredData.setPredicate(course -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                if (course.getNameCourse().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                } else if (course.getCourseID().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }else{
-                    return false;
-                }
-            });
-
-            SortedList<Course> sortedData = new SortedList<>(filteredData);
-
-            sortedData.comparatorProperty().bind(Register_CourseName_table.comparatorProperty());
-            Register_CourseName_table.setItems(sortedData);
         });
     }
 
-    // Inbox
+    //INBOX
 
     private String[] inboxPosition = {"All", "Student", "Lecturer"};
     private List<String> inboxReceiverID = new ArrayList<>();
@@ -660,19 +402,8 @@ public class dashBoardController implements Initializable{
         Inbox_position.setItems(listData);
     }
 
-    private List<String> getInboxClassSection(){
-        List<String> listClassSection = new ArrayList<>();
-        List<String> classSectionList = new StudentClassSectionDAO().getStudentClassSections(currentAccount.getStudentID());
-
-        for(String classSection : classSectionList){
-            listClassSection.add(new ClassSectionDAO().getClassSectionName(classSection));
-        }
-
-        return listClassSection;
-    }
-
     public void Inbox_Course(){
-        List<String> listData = getInboxClassSection();
+        List<String> listData = new ClassSectionDAO().getClassSectionNamebyLecturerID(this.lecturer.getID());
 
         ObservableList<String> list = FXCollections.observableArrayList(listData);
 
@@ -736,7 +467,7 @@ public class dashBoardController implements Initializable{
             }
         });
     }
-    
+
     private String getReceiverID(String receiverName){
         int index = studentNameList.indexOf(receiverName);
         if(index == -1){
@@ -815,7 +546,7 @@ public class dashBoardController implements Initializable{
         Inbox_Receiver.getSelectionModel().clearSelection();
     }
 
-    // Setting
+    // SETTING
     private String[] genderStatus = {"Male", "Female", "Other"};
 
     public void ChangeInfoGender_status(){
@@ -830,29 +561,14 @@ public class dashBoardController implements Initializable{
     }
 
     public void setSettingChangeInfoData(){
-        String userType = currentAccount.getTypeAccount();
-        if(userType.equals("Student")){
-            student = (Student) new AccountDAO().getInfoPerson(currentAccount.getStudentID(), "Student");
-            String[] parts;
-            if(student.getAddress() != null) {
-                parts = student.getAddress().split(" - ");
-            }else{
-                parts = new String[4];
-            }
-            Setting_ChangeInfo_FName.setText(student.getFirstName());
-            Setting_ChangeInfo_LName.setText(student.getLastName());
-            Setting_ChangeInfo_Phone.setText(student.getPhoneNumber());
-            Setting_ChangeInfo_Street.setText(parts[0]);
-            Setting_ChangeInfo_Ward.setText(parts[1]);
-            Setting_ChangeInfo_District.setText(parts[2]);
-            Setting_ChangeInfo_City.setText(parts[3]);
-            Setting_ChangeInfo_Gender.setValue(student.getGender());
-            Setting_ChangeInfo_Email.setText(student.getEmail());
-        }
+        Setting_ChangeInfo_FName.setText(this.lecturer.getFirstName());
+        Setting_ChangeInfo_LName.setText(this.lecturer.getLastName());
+        Setting_ChangeInfo_Email.setText(this.lecturer.getEmail());
+        Setting_ChangeInfo_Phone.setText(this.lecturer.getPhoneNumber());
+        Setting_ChangeInfo_Gender.setValue(this.lecturer.getGender());
     }
 
     public void saveSettingChangeInfoData(){
-        String userType = currentAccount.getTypeAccount();
 
         Alert alert;
         alert = new Alert(AlertType.CONFIRMATION);
@@ -862,30 +578,28 @@ public class dashBoardController implements Initializable{
         Optional<ButtonType> option = alert.showAndWait();
 
         if(option.get().equals(ButtonType.OK)){
-            if(userType.equals("Student")){
-                String studentID = currentAccount.getStudentID();
-                String fName = Setting_ChangeInfo_FName.getText();
-                String lName = Setting_ChangeInfo_LName.getText();
-                String phone = Setting_ChangeInfo_Phone.getText();
-                String street = Setting_ChangeInfo_Street.getText();
-                String ward = Setting_ChangeInfo_Ward.getText();
-                String district = Setting_ChangeInfo_District.getText();
-                String city = Setting_ChangeInfo_City.getText();
-                String gender = Setting_ChangeInfo_Gender.getValue();
-                String email = Setting_ChangeInfo_Email.getText();
-                String address = street + " - " + ward + " - " + district + " - " + city;
+            String lecturerId = this.lecturer.getID();
+            String fName = Setting_ChangeInfo_FName.getText();
+            String lName = Setting_ChangeInfo_LName.getText();
+            String email = Setting_ChangeInfo_Email.getText();
+            String phone = Setting_ChangeInfo_Phone.getText();
+            String gender = Setting_ChangeInfo_Gender.getValue();
 
-                Student student = new Student(fName, lName, phone, email, gender, null, address);
-                new StudentDAO().updateStudentInfo(studentID, student);
+            this.lecturer.setFirstName(fName);
+            this.lecturer.setLastName(lName);
+            this.lecturer.setEmail(email);
+            this.lecturer.setPhoneNumber(phone);
+            this.lecturer.setGender(gender);
 
-                alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Information changed successfully");
-                alert.showAndWait();
+            new LecturerDAO().updateLecturer(this.lecturer, lecturerId);
 
-                displayUserName();
-            }
+            alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Information Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Information changed successfully");
+            alert.showAndWait();
+
+            displayUserName();
         }
     }
 
@@ -942,25 +656,18 @@ public class dashBoardController implements Initializable{
     }
 
     public void setInfoData(){
-        String userType = currentAccount.getTypeAccount();
-        if(userType.equals("Student")){
-            student = (Student) new AccountDAO().getInfoPerson(currentAccount.getStudentID(), "Student");
-            Setting_InFo_ID.setText(student.getID());
-            Setting_InFo_FName.setText(student.getFirstName());
-            Setting_InFo_LName.setText(student.getLastName());
-            Setting_InFo_PN.setText(student.getPhoneNumber());
-            Setting_InFo_Email.setText(student.getEmail());
-            Setting_InFo_Address.setText(student.getAddress());
-            Setting_InFo_Gender.setText(student.getGender());
-        }
+        Setting_InFo_Email.setText(this.lecturer.getEmail());
+        Setting_InFo_FName.setText(this.lecturer.getFirstName());
+        Setting_InFo_LName.setText(this.lecturer.getLastName());
+        Setting_InFo_PN.setText(this.lecturer.getPhoneNumber());
+        Setting_InFo_Gender.setText(this.lecturer.getGender());
+        Setting_InFo_ID.setText(this.lecturer.getID());
     }
 
-    // Switch Form
     public void switchForm(ActionEvent e){
         setStyleButton(DashBoard_btn);
         if(e.getSource() == DashBoard_btn){
             Course_form.setVisible(false);
-            Register_form.setVisible(false);
             Schedule_form.setVisible(false);
             Setting_form.setVisible(false);
             Inbox_form.setVisible(false);
@@ -968,27 +675,14 @@ public class dashBoardController implements Initializable{
             setStyleButton(DashBoard_btn);
         }else if(e.getSource() == Course_btn){
             Course_form.setVisible(true);
-            Register_form.setVisible(false);
             Schedule_form.setVisible(false);
             Setting_form.setVisible(false);
             Inbox_form.setVisible(false);
             dashBoard_form.setVisible(false);
             setStyleButton(Course_btn);
-        }else if(e.getSource() == Register_btn){
-            Course_form.setVisible(false);
-            Register_form.setVisible(true);
-            Schedule_form.setVisible(false);
-            Setting_form.setVisible(false);
-            Inbox_form.setVisible(false);
-            dashBoard_form.setVisible(false);
-            setStyleButton(Register_btn);
-
-            registerShowNameCourse();
-            registerSearchCourse();
-
+            setCourseData();
         }else if(e.getSource() == Schedule_btn){
             Course_form.setVisible(false);
-            Register_form.setVisible(false);
             Schedule_form.setVisible(true);
             Setting_form.setVisible(false);
             Inbox_form.setVisible(false);
@@ -997,7 +691,6 @@ public class dashBoardController implements Initializable{
 
         }else if(e.getSource() == Setting_btn){
             Course_form.setVisible(false);
-            Register_form.setVisible(false);
             Schedule_form.setVisible(false);
             Setting_form.setVisible(true);
             Inbox_form.setVisible(false);
@@ -1007,7 +700,6 @@ public class dashBoardController implements Initializable{
             switchSettingForm(e);
         }else if(e.getSource() == InboxForm_btn){
             Course_form.setVisible(false);
-            Register_form.setVisible(false);
             Schedule_form.setVisible(false);
             Setting_form.setVisible(false);
             Inbox_form.setVisible(true);
@@ -1066,11 +758,11 @@ public class dashBoardController implements Initializable{
             clearWriteInbox();
         }
     }
-
+    
     public void setStyleButton(Button buttonName){
         String choseStyle = "-fx-background-color: #3796a7; background-color: #3796a7; -fx-text-fill: #fff; -fx-border-width: 0px; border-width: 0px;";
         String unChoseStyle = "-fx-background-color: transparent; background-color: transparent; -fx-font-size: 14px; font-size: 14px; -fx-font-family: Arial; font-family: Arial; -fx-cursor:hand; cursor:hand; -fx-text-fill: #000; -fx-border-color: #ddd; border-color: #ddd; -fx-border-width: 1px; border-width: 1px;";
-        Button[] buttons = {DashBoard_btn, Course_btn, Register_btn, Schedule_btn, Setting_btn, InboxForm_btn};
+        Button[] buttons = {DashBoard_btn, Course_btn, Schedule_btn, Setting_btn, InboxForm_btn};
 
         for(Button b : buttons){
             if(b == buttonName){
@@ -1143,6 +835,13 @@ public class dashBoardController implements Initializable{
         stage.show();
     }
 
+    public void displayUserName(){
+        this.currentAccount = new AccountDAO().getCurrentAccount();
+        this.lecturer = (Lecturer) new AccountDAO().getInfoPerson(this.currentAccount.getAccountID());
+        String name = lecturer.getFirstName() + " " + lecturer.getLastName();
+        userName.setText(name);
+    }
+
     @FXML
     private void close(){
         new AccountDAO().removeCurrentAccount(currentAccount.getAccountID());
@@ -1153,13 +852,6 @@ public class dashBoardController implements Initializable{
     public void minimize(){
         Stage stage = (Stage) main_form.getScene().getWindow();
         stage.setIconified(true);
-    }
-
-    public void displayUserName(){
-        this.currentAccount = new AccountDAO().getCurrentAccount();
-        this.student = (Student) new AccountDAO().getInfoPerson(currentAccount.getStudentID(), "Student");
-        String user = student.getFirstName() + " " + student.getLastName();
-        userName.setText(user);
     }
 
     public void logout(){
@@ -1182,23 +874,16 @@ public class dashBoardController implements Initializable{
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL arg0, ResourceBundle arg1) {
         displayUserName();
         displayNumberCourse();
-        displayTuition();
         displayNotification();
-        registerShowNameCourse();
-        
-        Course_status();
-        Register_status();
-        ChangeInfoGender_status();
-        setInbox();
-        setSentData();
-        setInboxData();
 
         setSettingChangeInfoData();
         setInfoData();
 
         currentAccount = new AccountDAO().getCurrentAccount();
     }
+    
+
 }

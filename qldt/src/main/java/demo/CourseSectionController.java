@@ -11,7 +11,9 @@ import java.util.ResourceBundle;
 import demo.Course.ClassSection;
 import demo.DAO.AccountDAO;
 import demo.DAO.ClassSectionDAO;
+import demo.DAO.CourseDAO;
 import demo.DAO.LecturerDAO;
+import demo.DAO.PaymentDAO;
 import demo.DAO.StudentClassSectionDAO;
 import demo.DAO.StudentCourseProgressDAO;
 
@@ -82,6 +84,8 @@ public class CourseSectionController implements Initializable{
                 new StudentClassSectionDAO().addStudentClassSection(classSectionID, studentID);
                 if(!(new StudentCourseProgressDAO().checkCourseProgress(studentID, courseID))){
                     new StudentCourseProgressDAO().addStudentCourseProgress(studentID, courseID);
+                    double tuitionFee = new CourseDAO().getTuitionFee(courseID);
+                    new PaymentDAO().addPayment(studentID, courseID, tuitionFee);
                 }
                 new ClassSectionDAO().updateEnrolled(classSectionID);
                 alert = new Alert(AlertType.INFORMATION);

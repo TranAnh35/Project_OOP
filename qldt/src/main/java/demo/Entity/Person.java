@@ -23,19 +23,39 @@ public class Person {
         return FirstName;
     }
 
+    public void setFirstName(String firstName){
+        this.FirstName = firstName;
+    }
+
     public String getLastName(){
         return LastName;
+    }
+
+    public void setLastName(String lastName){
+        this.LastName = lastName;
     }
 
     public String getPhoneNumber(){
         return PhoneNumber;
     }
 
+    public void setPhoneNumber(String phoneNumber){
+        this.PhoneNumber = phoneNumber;
+    }
+
     public String getEmail(){
         return Email;
     }
 
+    public void setEmail(String email){
+        this.Email = email;
+    }
+
     public String getGender(){
         return Gender;
+    }
+
+    public void setGender(String gender){
+        this.Gender = gender;
     }
 }

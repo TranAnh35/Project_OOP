@@ -157,19 +157,19 @@
                                     <AnchorPane layoutX="-19.0" layoutY="-26.0" prefHeight="131.0" prefWidth="217.0" styleClass="card" stylesheets="@../DashBoardDesign.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="5.0">
                                        <children>
                                           <FontAwesomeIcon fill="WHITE" glyphName="TASKS" layoutX="26.0" layoutY="96.0" size="5em" text="" AnchorPane.leftAnchor="26.0" />
-                                          <Label fx:id="dashBoard_NOC" layoutX="96.0" layoutY="102.0" text="Number Of Courses" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                          <Label layoutX="96.0" layoutY="102.0" text="Number Of Courses" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                              <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="123.0" layoutY="11.0" prefHeight="17.0" prefWidth="81.0" text="0" textFill="WHITE">
+                                          <Label fx:id="dashBoard_NOC" alignment="CENTER_RIGHT" layoutX="123.0" layoutY="11.0" prefHeight="17.0" prefWidth="81.0" text="0" textFill="WHITE">
                                              <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="dashBoard_Noti" layoutX="320.0" layoutY="-10.0" prefHeight="115.0" prefWidth="217.0" styleClass="card" stylesheets="@../DashBoardDesign.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="327.0" AnchorPane.topAnchor="5.0">
+                                    <AnchorPane layoutX="320.0" layoutY="-10.0" prefHeight="115.0" prefWidth="217.0" styleClass="card" stylesheets="@../DashBoardDesign.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="327.0" AnchorPane.topAnchor="5.0">
                                        <children>
                                           <FontAwesomeIcon fill="WHITE" glyphName="INBOX" layoutX="29.0" layoutY="93.0" size="5em" AnchorPane.leftAnchor="26.0" />
                                           <Label layoutX="67.0" layoutY="114.0" text="Notification" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -177,13 +177,13 @@
                                                 <Font name="Tahoma Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="141.0" layoutY="15.0" prefHeight="17.0" prefWidth="81.0" text="0" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                          <Label fx:id="dashBoard_Noti" alignment="CENTER_RIGHT" layoutX="141.0" layoutY="15.0" prefHeight="17.0" prefWidth="81.0" text="0" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                              <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                              </font>
                                           </Label>
                                        </children></AnchorPane>
-                                    <AnchorPane fx:id="dashBoard_Tuition" layoutX="448.0" layoutY="14.0" prefHeight="115.0" prefWidth="217.0" styleClass="card" stylesheets="@../DashBoardDesign.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="599.0" AnchorPane.topAnchor="5.0">
+                                    <AnchorPane layoutX="448.0" layoutY="14.0" prefHeight="115.0" prefWidth="217.0" styleClass="card" stylesheets="@../DashBoardDesign.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="599.0" AnchorPane.topAnchor="5.0">
                                        <children>
                                           <FontAwesomeIcon fill="WHITE" glyphName="MONEY" layoutX="14.0" layoutY="87.0" size="5em" AnchorPane.leftAnchor="26.0" />
                                           <Label layoutX="106.0" layoutY="123.0" text="Tuition Debt" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -191,7 +191,7 @@
                                                 <Font name="Tahoma Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="CENTER_RIGHT" layoutX="151.0" layoutY="13.0" prefHeight="17.0" prefWidth="81.0" text="0" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                          <Label fx:id="dashBoard_Tuition" alignment="CENTER_RIGHT" layoutX="151.0" layoutY="13.0" prefHeight="19.0" prefWidth="183.0" text="0" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                              <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                              </font>
@@ -241,7 +241,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="Course_form" layoutX="79.0" layoutY="129.0" prefHeight="555.0" prefWidth="887.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="Course_form" layoutX="79.0" layoutY="129.0" prefHeight="555.0" prefWidth="887.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@Design/DashBoardDesign.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                  <styleClass>
@@ -255,7 +255,7 @@
                                        </font>
                                     </TextField>
                                     <FontAwesomeIcon glyphName="SEARCH" layoutX="29.0" layoutY="41.0" size="1.5em" text="" />
-                                    <TableView fx:id="Course_table" layoutX="19.0" layoutY="67.0" prefHeight="324.0" prefWidth="286.0" styleClass="table-column" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="70.0">
+                                    <TableView fx:id="Course_table" layoutX="20.0" layoutY="76.0" prefHeight="324.0" prefWidth="286.0" styleClass="table-column" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="76.0">
                                       <columns>
                                         <TableColumn fx:id="Course_col_STT" prefWidth="75.0" text="STT" />
                                         <TableColumn fx:id="Course_col_ID" prefWidth="172.0" text="Mã" />
@@ -497,7 +497,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="Register_form" prefHeight="555.0" prefWidth="887.0" stylesheets="@Design/DashBoardDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="Register_form" prefHeight="555.0" prefWidth="887.0" stylesheets="@Design/DashBoardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="28.0" layoutY="341.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="215.0">
                                  <styleClass>
