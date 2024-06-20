@@ -113,6 +113,11 @@ CREATE TABLE IF NOT EXISTS Account (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+INSERT INTO `account` (`Username`, `Password`, `UserType`, `LecturerID`) 
+VALUES 
+	('danghoan', '123', 'Lecturer', 'GV-001'),
+	('trinhthanh', '123', 'Lecturer', 'GV-002');
+
 -- Bảng Session để lưu thông tin phiên đăng nhập hiện tại
 CREATE TABLE IF NOT EXISTS Session (
     AccountID INT primary key,
