@@ -206,7 +206,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <BarChart layoutX="-111.0" layoutY="-41.0" prefHeight="359.0" prefWidth="389.0" title="Number of courses per semester" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <BarChart layoutX="-111.0" layoutY="-41.0" prefHeight="359.0" prefWidth="389.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <xAxis>
                                                 <CategoryAxis side="BOTTOM" />
                                              </xAxis>
@@ -222,7 +222,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <LineChart layoutX="-114.0" layoutY="-16.0" prefHeight="384.0" prefWidth="400.0" title="GPA per semester" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <LineChart layoutX="-114.0" layoutY="-16.0" prefHeight="384.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <xAxis>
                                                 <CategoryAxis side="BOTTOM" />
                                              </xAxis>
