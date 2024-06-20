@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import demo.Course.StudentCourseProgress;
 import demo.DAO.ClassSectionDAO;
 import demo.DAO.GradeDAO;
-import demo.DAO.StudentClassSectionDAO;
 import demo.DAO.StudentCourseProgressDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
