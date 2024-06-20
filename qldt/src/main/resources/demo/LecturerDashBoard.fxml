@@ -469,7 +469,7 @@
                                                       <HBox fx:id="Inbox_Sent_Table_Tiltle" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="718.0" styleClass="column-header-background">
                                                          <children>
                                                             <Label prefHeight="17.0" prefWidth="35.0" />
-                                                            <Label alignment="CENTER" prefHeight="27.0" prefWidth="205.0" text="Sender" textFill="WHITE">
+                                                            <Label alignment="CENTER" prefHeight="27.0" prefWidth="205.0" text="Receiver" textFill="WHITE">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>

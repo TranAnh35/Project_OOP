@@ -60,4 +60,24 @@ public class GradeDAO {
         }
         return false;
     }
+
+    public float[] getGrade(String classSectionID, String studentId){
+        float[] grade = new float[3];
+        try{
+            connect = DataBase.connecDb();
+            String sql = "SELECT * FROM Grade WHERE classSectionID = ? AND studentId = ?;";
+            prepare = connect.prepareStatement(sql);
+            prepare.setString(1, classSectionID);
+            prepare.setString(2, studentId);
+            result = prepare.executeQuery();
+            if(result.next()){
+                grade[0] = result.getFloat("Grade_CC");
+                grade[1] = result.getFloat("Grade_Midterm");
+                grade[2] = result.getFloat("Grade_Endterm");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return grade;
+    }
 }

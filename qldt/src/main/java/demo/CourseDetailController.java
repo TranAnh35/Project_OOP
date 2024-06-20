@@ -3,6 +3,7 @@ package demo;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import demo.Course.StudentCourseProgress;
@@ -16,7 +17,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -123,9 +127,11 @@ public class CourseDetailController implements Initializable{
 
     public void initData(List<String> studentIdList, List<String> StudentNameList){
         List<courseDetail> courseDetailList = new ArrayList<>();
+        String classSectionId = SharedData.getInstance().getClassSectionID();
 
         for(int i = 0; i < studentIdList.size(); i++){
-            courseDetailList.add(new courseDetail(i + 1, studentIdList.get(i), StudentNameList.get(i), 0, 0, 0));
+            float[] grade = new GradeDAO().getGrade(classSectionId, studentIdList.get(i));
+            courseDetailList.add(new courseDetail(i + 1, studentIdList.get(i), StudentNameList.get(i), grade[0], grade[1], grade[2]));
         }
 
         CourseDetail_table.setEditable(true);
@@ -133,6 +139,10 @@ public class CourseDetailController implements Initializable{
         CourseDetail_STT.setCellValueFactory(new PropertyValueFactory<>("STT"));
         CourseDetail_MSSV.setCellValueFactory(new PropertyValueFactory<>("MSSV"));
         CourseDetail_Name.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        CourseDetail_Diem_CC.setCellValueFactory(new PropertyValueFactory<>("Diem_CC"));
+        CourseDetail_Diem_Gk.setCellValueFactory(new PropertyValueFactory<>("Diem_GK"));
+        CourseDetail_Diem_Ck.setCellValueFactory(new PropertyValueFactory<>("Diem_CK"));
+
         CourseDetail_Diem_CC.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
         CourseDetail_Diem_Gk.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
         CourseDetail_Diem_Ck.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
@@ -190,6 +200,8 @@ public class CourseDetailController implements Initializable{
             String courseID = new ClassSectionDAO().getCourseIDByClassSectionId(classSectionId);
             new StudentCourseProgressDAO().updateScore(MSSV, courseID, finalScore);
         }
+
+        
     }
 
     @Override
@@ -204,7 +216,14 @@ public class CourseDetailController implements Initializable{
         CourseDetail_Save_btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                saveGrade();
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Are you sure you want to save the grade?");
+                Optional<ButtonType> option = alert.showAndWait();
+
+                if(option.get() == ButtonType.OK)
+                    saveGrade();
             }
         });
     }

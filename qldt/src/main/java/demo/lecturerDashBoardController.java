@@ -525,12 +525,12 @@ public class lecturerDashBoardController implements Initializable{
 
         for(Inbox inbox : listInbox){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Inbox.fxml"));
-            String senderName = new InboxDAO().getSenderName(inbox.getSenderID());
+            String receiverName = new InboxDAO().getReceiverName(inbox.getReceiverID());
             String tiltle = inbox.getTiltle();
             try {
                 HBox hbox = loader.load();
                 InboxController controller = loader.getController();
-                controller.setData(senderName, tiltle);
+                controller.setData(receiverName, tiltle);
                 Inbox_Sent_Table.getChildren().add(hbox);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -698,6 +698,7 @@ public class lecturerDashBoardController implements Initializable{
             setStyleButton(Setting_btn);
 
             switchSettingForm(e);
+            setInfoData();
         }else if(e.getSource() == InboxForm_btn){
             Course_form.setVisible(false);
             Schedule_form.setVisible(false);
@@ -727,6 +728,7 @@ public class lecturerDashBoardController implements Initializable{
             Setting_changePass_form.setVisible(false);
             Setting_InFo_Form.setVisible(true);
             setStyleSettingButton(Info_btn);
+            setInfoData();
         }
     }
 
