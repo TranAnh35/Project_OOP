@@ -4,7 +4,7 @@ package demo.Entity;
  * Class này dùng để lưu trữ thông tin của một người
  */
 
-public class Person {
+public abstract class Person {
     private String FirstName;
     private String LastName;
     private String PhoneNumber;
